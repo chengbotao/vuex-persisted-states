@@ -1,0 +1,36 @@
+{
+  "name": "vuex-persisted-states",
+  "version": "1.0.2",
+  "description": "Keep your vuex state between page reloads.",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "repository": "git@github.com:chengbotao/vuex-persisted-states.git",
+  "author": "chengbotao <chengbotao5221@163.com>",
+  "license": "MIT",
+  "private": false,
+  "keywords": [
+    "vue",
+    "vuex",
+    "storage",
+    "ts",
+    "typescript"
+  ],
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run build-ts",
+    "build-ts": "npx tsc -p tsconfig.json",
+    "clean": "rimraf ./dist"
+  },
+  "devDependencies": {
+    "lint-staged": "^10.2.11",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.9.7"
+  },
+  "lint-staged": {
+    "{src,test}/**/*.ts": [
+      "git add"
+    ]
+  }
+}
