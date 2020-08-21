@@ -4,7 +4,7 @@
  * @Author: Chengbotao
  * @Date: 2020-08-14 16:35:15
  * @LastEditors: Chengbotao
- * @LastEditTime: 2020-08-21 12:53:02
+ * @LastEditTime: 2020-08-21 17:38:48
  * @FilePath: \vuex-persisted-states\src\core\persistedState.ts
  */
 import { Options } from './../types/index';
@@ -14,6 +14,7 @@ import { setState } from '../helpers/setState';
 import { getState } from '../helpers/getState';
 import { replaceStater } from '../helpers/replaceStater';
 import { reducer } from '../helpers/reducer';
+import { filterMutation } from '../helpers/filterMutation';
 
 
 function persistedState(options: Options = {}) {
@@ -27,7 +28,7 @@ function persistedState(options: Options = {}) {
   return (store) => {
     tempState = store.state
     savedState = spreadPaths.reduce((acc, cur) => {
-      return deepMerge(acc, getState(cur.key || key, cur.storage))
+      return deepMerge(acc, (options.getState || getState)(cur.key || key, cur.storage))
     }, {})
     if (isPlainObject(savedState)) {
       replaceStater(store, deepMerge(store.state, savedState))
@@ -40,18 +41,24 @@ function persistedState(options: Options = {}) {
             item.storage.removeItem(item.key || key)
           })
           replaceStater(store, deepMerge(state, tempState))
-          return;
         } else {
           let payloads = mutation.payload.reduce((subState, path) => {
             return reduceSetObj(subState, path, reduceGetObj(tempState, path))
           }, {})
           state = deepMerge(state, payloads);
           replaceStater(store, state)
+          spreadPaths.forEach((item) => {
+            (options.setState || setState)(item.key || key, reducer(state, item.paths), item.storage);
+          })
         }
+        return;
       }
-      spreadPaths.forEach((item) => {
-        setState(item.key || key, reducer(state, item.paths), item.storage);
-      })
+
+      if ((options.filterMutation || filterMutation)(mutation)) {
+        spreadPaths.forEach((item) => {
+          (options.setState || setState)(item.key || key, reducer(state, item.paths), item.storage);
+        })
+      }
     })
 
   }

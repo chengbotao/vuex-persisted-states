@@ -4,7 +4,7 @@
  * @Author: Chengbotao
  * @Date: 2020-08-14 16:30:58
  * @LastEditors: Chengbotao
- * @LastEditTime: 2020-08-21 12:38:11
+ * @LastEditTime: 2020-08-21 17:29:04
  * @FilePath: \vuex-persisted-states\src\types\index.ts
  */
 export interface Storage {
@@ -24,6 +24,7 @@ export interface Options {
   spreadPaths?: Path[];
   storage?: Storage;
   resetMutationType?: string
-  // getState?: (key: string, storage: Storage) => any;
-  // setState?: (key: string, state: any, storage: Storage) => void;
+  getState?: (key: string, storage: Storage) => any;
+  setState?: (key: string, state: any, storage: Storage) => void;
+  filterMutation?: (mutation) => boolean
 }
