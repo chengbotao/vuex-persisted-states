@@ -4,8 +4,8 @@
  * @Author: Chengbotao
  * @Date: 2020-08-14 16:31:13
  * @LastEditors: Chengbotao
- * @LastEditTime: 2020-08-14 17:02:07
- * @FilePath: \vuex-persisted-state\src\helpers\utils.ts
+ * @LastEditTime: 2020-08-21 11:44:40
+ * @FilePath: \vuex-persisted-states\src\helpers\utils.ts
  */
 const toString = Object.prototype.toString;
 
@@ -19,7 +19,11 @@ export function isPlainObject(val: any): val is Object {
 }
 
 export function isNullObject(val: Object): Boolean {
-  return Object.keys(val).length === 0;
+  return val == undefined || Object.keys(val).length === 0;
+}
+
+export function isString(val: any): val is String {
+  return toString.call(val) === "[object String]"
 }
 
 /**
@@ -46,4 +50,28 @@ export function deepMerge(...objects: any[]): Object {
     }
   })
   return result
+}
+
+/**
+ * @description: 
+ * @param {type} 
+ * @return {type} 
+ */
+export function reduceGetObj(object: object, path: string) {
+  let tempPath = isString(path) ? path.split(".") : path
+  return tempPath.reduce((obj, key) => {
+    return obj && obj[key]
+  }, object)
+}
+
+/**
+ * @description: 
+ * @param {type} 
+ * @return {type} 
+ */
+export function reduceSetObj(object: object, path: string, val: any) {
+  let tempPath = isString(path) ? path.split(".") : path
+  return (tempPath.slice(0, -1).reduce((obj, key) => {
+    return obj[key] = obj[key] || {};
+  }, object)[tempPath.pop()] = val), object;
 }

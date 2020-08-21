@@ -1,6 +1,6 @@
 {
   "name": "vuex-persisted-states",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "Keep your vuex state between page reloads.",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -24,13 +24,11 @@
     "clean": "rimraf ./dist"
   },
   "devDependencies": {
+    "@commitlint/cli": "^9.1.2",
+    "@commitlint/config-conventional": "^9.1.2",
+    "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
     "rimraf": "^3.0.2",
     "typescript": "^3.9.7"
-  },
-  "lint-staged": {
-    "{src,test}/**/*.ts": [
-      "git add"
-    ]
   }
 }
