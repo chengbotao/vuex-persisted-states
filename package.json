@@ -1,6 +1,6 @@
 {
   "name": "vuex-persisted-states",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Keep your vuex state between page reloads.",
   "main": "dist/index.js",
   "module": "dist/index.js",
