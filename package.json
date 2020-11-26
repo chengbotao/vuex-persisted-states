@@ -1,13 +1,12 @@
 {
   "name": "vuex-persisted-states",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Keep your vuex state between page reloads.",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "repository": "git@github.com:chengbotao/vuex-persisted-states.git",
   "author": "chengbotao <chengbotao5221@163.com>",
   "license": "MIT",
-  "private": false,
   "keywords": [
     "vue",
     "vuex",
