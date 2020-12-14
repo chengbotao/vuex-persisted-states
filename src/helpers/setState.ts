@@ -4,11 +4,11 @@
  * @Author: Chengbotao
  * @Date: 2020-08-14 17:35:18
  * @LastEditors: Chengbotao
- * @LastEditTime: 2020-09-14 17:47:14
+ * @LastEditTime: 2020-12-14 17:56:21
  * @FilePath: \vuex-persisted-states\src\helpers\setState.ts
  */
 import { Storage } from './../types/index';
-export function setState(
+export default function setState(
   key: string,
   value: any,
   storage: Storage,

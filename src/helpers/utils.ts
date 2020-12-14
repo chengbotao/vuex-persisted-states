@@ -4,8 +4,8 @@
  * @Author: Chengbotao
  * @Date: 2020-08-14 16:31:13
  * @LastEditors: Chengbotao
- * @LastEditTime: 2020-09-15 10:25:06
- * @FilePath: \chengbt-npm\vuex-persisted-states\src\helpers\utils.ts
+ * @LastEditTime: 2020-12-14 17:47:24
+ * @FilePath: \vuex-persisted-states\src\helpers\utils.ts
  */
 
 const toString = Object.prototype.toString;
@@ -24,7 +24,7 @@ export function isPlainObject(val: any): val is Object {
  * @param {Object}
  * @return {Boolean}
  */
-export function isNullObject(val: Object): Boolean {
+export function isEmptyObject(val: Object): Boolean {
   // tslint:disable-next-line: triple-equals
   return val == undefined || Object.keys(val).length === 0;
 }
@@ -39,14 +39,14 @@ export function isString(val: any): val is String {
 }
 
 /**
- * @description: 对象深拷贝
+ * @description: 对象合并
  * @param {any[]}
  * @return {Object}
  */
 export function deepMerge(...objects: any[]): Object {
   const result = Object.create(null);
   objects.forEach((obj) => {
-    if (!isNullObject(obj)) {
+    if (!isEmptyObject(obj)) {
       Object.keys(obj).forEach((key) => {
         const val = obj[key];
         if (isPlainObject(val)) {
@@ -86,6 +86,7 @@ export function reduceGetObj(object: object, path: string | string[]): object {
  */
 export function reduceSetObj(object: object, path: string, val: any): object {
   let tempPath = isString(path) ? path.split('.') : path;
+  // , 操作符
   return (
     (tempPath.slice(0, -1).reduce((obj, key) => {
       return (obj[key] = obj[key] || {});

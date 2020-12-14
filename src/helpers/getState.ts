@@ -8,7 +8,7 @@
  * @FilePath: \vuex-persisted-states\src\helpers\getState.ts
  */
 import { Storage } from './../types/index';
-export function getState(
+export default function getState(
   key: string,
   storage: Storage,
   callback?: (value: string) => any

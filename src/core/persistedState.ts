@@ -4,8 +4,8 @@
  * @Author: Chengbotao
  * @Date: 2020-08-14 16:35:15
  * @LastEditors: Chengbotao
- * @LastEditTime: 2020-09-15 10:01:54
- * @FilePath: \chengbt-npm\vuex-persisted-states\src\core\persistedState.ts
+ * @LastEditTime: 2020-12-14 18:09:07
+ * @FilePath: \vuex-persisted-states\src\core\persistedState.ts
  */
 import { Options, Store } from './../types/index';
 import {
@@ -14,17 +14,19 @@ import {
   reduceSetObj,
   reduceGetObj,
 } from '../helpers/utils';
-import { subscriber } from '../helpers/subscriber';
-import { setState } from '../helpers/setState';
-import { getState } from '../helpers/getState';
-import { replaceStater } from '../helpers/replaceStater';
-import { reducer } from '../helpers/reducer';
-import { filterMutation } from '../helpers/filterMutation';
+import {
+  subscriber,
+  setState,
+  getState,
+  replaceStater,
+  reducer,
+  filterMutation,
+} from '../helpers';
 
-function persistedState(options: Options = {}) {
-  const key = options.key || 'vuex';
+export default function persistedState(options: Options = {}) {
+  const key: string = options.key || 'vuex';
   const storage = options.storage || (window && window.localStorage);
-  const resetMutationType = options.resetMutationType || 'resetStates';
+  const resetMutationType: string = options.resetMutationType || 'resetStates';
   let spreadPaths = options.spreadPaths || [];
   let savedState: any;
   let tempState: any;
@@ -92,4 +94,3 @@ function persistedState(options: Options = {}) {
     });
   };
 }
-export default persistedState;
